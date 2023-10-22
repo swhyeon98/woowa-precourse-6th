@@ -30,22 +30,7 @@ public class Application {
             strikeCount = getStrikeCount(computer, numbers);
             ballCount = getBallCount(computer, numbers);
 
-            if (strikeCount > 0 && ballCount > 0) {
-                System.out.println(ballCount + "볼 " + strikeCount + "스트라이크");
-                continue;
-            }
-
-            if (strikeCount > 0) {
-                System.out.println(strikeCount + "스트라이크");
-            }
-
-            if (ballCount > 0) {
-                System.out.println(ballCount + "볼");
-            }
-
-            if (strikeCount == 0 && ballCount == 0) {
-                System.out.println("낫싱");
-            }
+            printBallAndStrikeCount(strikeCount, ballCount);
 
             if (strikeCount == 3) {
                 System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
@@ -117,5 +102,24 @@ public class Application {
             }
         }
         return ball - strike;
+    }
+
+    private static void printBallAndStrikeCount(int strikeCount, int ballCount) {
+        if (strikeCount > 0 && ballCount > 0) {
+            System.out.println(ballCount + "볼 " + strikeCount + "스트라이크");
+            return;
+        }
+
+        if (strikeCount > 0) {
+            System.out.println(strikeCount + "스트라이크");
+        }
+
+        if (ballCount > 0) {
+            System.out.println(ballCount + "볼");
+        }
+
+        if (strikeCount == 0 && ballCount == 0) {
+            System.out.println("낫싱");
+        }
     }
 }
