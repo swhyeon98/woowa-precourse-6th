@@ -32,9 +32,7 @@ public class Application {
 
             printBallAndStrikeCount(strikeCount, ballCount);
 
-            if (strikeCount == 3) {
-                System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-                System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+            if (isGameOver(strikeCount)) {
                 String userChoice = Console.readLine();
 
                 if (userChoice.equals("1")) {
@@ -121,5 +119,16 @@ public class Application {
         if (strikeCount == 0 && ballCount == 0) {
             System.out.println("낫싱");
         }
+    }
+
+    private static boolean isGameOver(int strikeCount) {
+        if (strikeCount == 3) {
+            System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+            System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+
+            return true;
+        }
+
+        return false;
     }
 }
