@@ -26,7 +26,7 @@ public class Application {
 
             generateRandomNumber(computer);
 
-            String input = pirintInputNumber();
+            String input = printInputNumber();
 
             numbers = Arrays.stream(input.split(""))
                     .map(Integer::parseInt)
@@ -83,7 +83,7 @@ public class Application {
         }
     }
 
-    private static String pirintInputNumber() {
+    private static String printInputNumber() {
         System.out.print("숫자를 입력해주세요 : ");
         String input = Console.readLine();
         return input;
