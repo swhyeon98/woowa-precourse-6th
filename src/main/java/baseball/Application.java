@@ -24,12 +24,7 @@ public class Application {
             ballCount = 0;
             strikeCount = 0;
 
-            while (computer.size() < 3) {
-                int randomNumber = Randoms.pickNumberInRange(1, 9);
-                if (!computer.contains(randomNumber)) {
-                    computer.add(randomNumber);
-                }
-            }
+            generateRandomNumber(computer);
 
             System.out.print("숫자를 입력해주세요 : ");
             String input = Console.readLine();
@@ -84,6 +79,15 @@ public class Application {
                 }
 
                 throw new IllegalArgumentException("1 또는 2 중 하나만 선택하세요.");
+            }
+        }
+    }
+
+    private static void generateRandomNumber(List<Integer> computer) {
+        while (computer.size() < 3) {
+            int randomNumber = Randoms.pickNumberInRange(1, 9);
+            if (!computer.contains(randomNumber)) {
+                computer.add(randomNumber);
             }
         }
     }
