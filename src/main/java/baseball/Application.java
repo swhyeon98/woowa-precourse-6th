@@ -19,10 +19,6 @@ public class Application {
         System.out.println("숫자 야구 게임을 시작합니다.");
 
         while (true) {
-            numbers = new ArrayList<>();
-            ballCount = 0;
-            strikeCount = 0;
-
             generateRandomNumber(computer);
 
             String input = printInputNumber();
@@ -31,18 +27,13 @@ public class Application {
 
             validateDuplicate(numbers.size());
 
+            strikeCount = getStrikeCount(computer, numbers);
+            ballCount = getBallCount(computer, numbers);
 
-            for (int i = 0; i < 3; i++) {
-                if (computer.get(i).equals(numbers.get(i))) {
-                    strikeCount++;
-                }
-
-                if (computer.contains(numbers.get(i))) {
-                    ballCount++;
-                }
+            if (strikeCount > 0 && ballCount > 0) {
+                System.out.println(ballCount + "볼 " + strikeCount + "스트라이크");
+                continue;
             }
-
-            ballCount -= strikeCount;
 
             if (strikeCount > 0) {
                 System.out.println(strikeCount + "스트라이크");
@@ -102,5 +93,29 @@ public class Application {
         if (size < 3) {
             throw new IllegalArgumentException("서로 다른 3자리의 수를 입력해주세요.");
         }
+    }
+
+    private static int getStrikeCount(List<Integer> computerNumber, List<Integer> userNumber) {
+        int strike = 0;
+        for (int i = 0; i < 3; i++) {
+            if (computerNumber.get(i) == userNumber.get(i)) {
+                strike++;
+            }
+        }
+        return strike;
+    }
+
+    private static int getBallCount(List<Integer> computerNumber, List<Integer> userNumber) {
+        int strike = 0;
+        int ball = 0;
+        for (int i = 0; i < 3; i++) {
+            if (computerNumber.get(i) == userNumber.get(i)) {
+                strike++;
+            }
+            if (computerNumber.contains(userNumber.get(i))) {
+                ball++;
+            }
+        }
+        return ball - strike;
     }
 }
