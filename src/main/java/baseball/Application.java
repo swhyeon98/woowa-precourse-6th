@@ -26,8 +26,8 @@ public class Application {
 
             generateRandomNumber(computer);
 
-            System.out.print("숫자를 입력해주세요 : ");
-            String input = Console.readLine();
+            String input = pirintInputNumber();
+
             numbers = Arrays.stream(input.split(""))
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
@@ -81,6 +81,12 @@ public class Application {
                 throw new IllegalArgumentException("1 또는 2 중 하나만 선택하세요.");
             }
         }
+    }
+
+    private static String pirintInputNumber() {
+        System.out.print("숫자를 입력해주세요 : ");
+        String input = Console.readLine();
+        return input;
     }
 
     private static void generateRandomNumber(List<Integer> computer) {
