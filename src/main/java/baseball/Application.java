@@ -13,7 +13,6 @@ public class Application {
         // TODO: 프로그램 구현
         List<Integer> computer = new ArrayList<>();
         List<Integer> numbers;
-        int numbersSize;
         int ballCount;
         int strikeCount;
 
@@ -30,14 +29,8 @@ public class Application {
 
             numbers = convertStringToIntList(input);
 
-            numbersSize = (int) Arrays.stream(input.split(""))
-                    .map(Integer::parseInt)
-                    .distinct()
-                    .count();
+            validateDuplicate(numbers.size());
 
-            if (numbersSize < 3) {
-                throw new IllegalArgumentException("서로 다른 3자리의 수를 입력해주세요.");
-            }
 
             for (int i = 0; i < 3; i++) {
                 if (computer.get(i).equals(numbers.get(i))) {
@@ -102,6 +95,12 @@ public class Application {
             if (!computer.contains(randomNumber)) {
                 computer.add(randomNumber);
             }
+        }
+    }
+
+    private static void validateDuplicate(int size) {
+        if (size < 3) {
+            throw new IllegalArgumentException("서로 다른 3자리의 수를 입력해주세요.");
         }
     }
 }
