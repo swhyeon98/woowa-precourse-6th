@@ -28,9 +28,7 @@ public class Application {
 
             String input = printInputNumber();
 
-            numbers = Arrays.stream(input.split(""))
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
+            numbers = convertStringToIntList(input);
 
             numbersSize = (int) Arrays.stream(input.split(""))
                     .map(Integer::parseInt)
@@ -81,6 +79,15 @@ public class Application {
                 throw new IllegalArgumentException("1 또는 2 중 하나만 선택하세요.");
             }
         }
+    }
+
+    private static List<Integer> convertStringToIntList(String input) {
+        List<Integer> numbers;
+        numbers = Arrays.stream(input.split(""))
+                .map(Integer::parseInt)
+                .distinct()
+                .collect(Collectors.toList());
+        return numbers;
     }
 
     private static String printInputNumber() {
