@@ -21,7 +21,7 @@ public class Application {
         while (true) {
             generateRandomNumber(computer);
 
-            String input = printInputNumber();
+            String input = getUserInput();
 
             numbers = convertStringToIntList(input);
 
@@ -47,7 +47,7 @@ public class Application {
         return numbers;
     }
 
-    private static String printInputNumber() {
+    private static String getUserInput() {
         System.out.print("숫자를 입력해주세요 : ");
         String input = Console.readLine();
         return input;
