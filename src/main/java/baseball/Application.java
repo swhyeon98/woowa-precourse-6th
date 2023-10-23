@@ -79,17 +79,13 @@ public class Application {
     }
 
     private static int getBallCount(List<Integer> computerNumber, List<Integer> userNumber) {
-        int strike = 0;
         int ball = 0;
         for (int i = 0; i < 3; i++) {
-            if (computerNumber.get(i) == userNumber.get(i)) {
-                strike++;
-            }
             if (computerNumber.contains(userNumber.get(i))) {
                 ball++;
             }
         }
-        return ball - strike;
+        return ball - getStrikeCount(computerNumber, userNumber);
     }
 
     private static String getBaseballResult(int strikeCount, int ballCount) {
