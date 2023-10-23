@@ -92,23 +92,24 @@ public class Application {
         return ball - strike;
     }
 
-    private static void printBallAndStrikeCount(int strikeCount, int ballCount) {
+    private static String getBaseballResult(int strikeCount, int ballCount) {
         if (strikeCount > 0 && ballCount > 0) {
-            System.out.println(ballCount + "볼 " + strikeCount + "스트라이크");
-            return;
+            return ballCount + "볼 " + strikeCount + "스트라이크";
         }
 
         if (strikeCount > 0) {
-            System.out.println(strikeCount + "스트라이크");
+            return strikeCount + "스트라이크";
         }
 
         if (ballCount > 0) {
-            System.out.println(ballCount + "볼");
+            return ballCount + "볼";
         }
 
-        if (strikeCount == 0 && ballCount == 0) {
-            System.out.println("낫싱");
-        }
+        return "낫싱";
+    }
+
+    private static void printBallAndStrikeCount(int strikeCount, int ballCount) {
+        System.out.println(getBaseballResult(strikeCount, ballCount));
     }
 
     private static boolean isGameOver(int strikeCount) {
