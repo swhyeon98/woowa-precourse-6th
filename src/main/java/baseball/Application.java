@@ -11,6 +11,15 @@ import java.util.stream.Collectors;
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
+        while (true) {
+            playGame();
+            if (!restartOrExitGame()) {
+                break;
+            }
+        }
+    }
+
+    private static void playGame() {
         List<Integer> computer = new ArrayList<>();
         List<Integer> numbers;
         int ballCount;
@@ -32,6 +41,7 @@ public class Application {
 
             if (isGameOver(strikeCount)) {
                 handleGameOver(computer);
+                return;
             }
         }
     }
@@ -133,10 +143,7 @@ public class Application {
 
     private static void handleGameOver(List<Integer> computer) {
         System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-        if (restartOrExitGame()) {
-            computer.clear();
-        }
-        System.exit(0);
+        computer.clear();
     }
 
     private static boolean restartOrExitGame() {
