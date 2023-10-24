@@ -6,9 +6,21 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Application {
+    private static final int INIT_NUMBER = 0;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 9;
+    private static final int MAX_NUMBER_SIZE = 3;
+    private static final int WINNING_STRIKE_COUNT = 3;
+
+    private static final String RESTART_KEYWORD = "1";
+    private static final String EXIT_KEYWORD = "2";
+
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("^[1-9]+$");
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         while (true) {
@@ -29,7 +41,7 @@ public class Application {
 
         while (true) {
             generateRandomNumber(computer);
-
+            System.out.println(computer);
             String input = getUserInput();
 
             numbers = convertStringToIntList(input);
@@ -68,14 +80,14 @@ public class Application {
     }
 
     private static void validateIsNumber(String input) {
-        if (!input.matches("^[1-9]+$")) {
+        if (!NUMBER_PATTERN.matcher(input).matches()) {
             throw new IllegalArgumentException("숫자만 입력해주세요.");
         }
     }
 
     private static void validateNumberSize(String input) {
-        if (input.length() != 3) {
-            throw new IllegalArgumentException("3자리의 수를 입력해주세요.");
+        if (input.length() != MAX_NUMBER_SIZE) {
+            throw new IllegalArgumentException(MAX_NUMBER_SIZE + "자리의 수를 입력해주세요.");
         }
     }
 
@@ -89,8 +101,8 @@ public class Application {
     }
 
     private static void generateRandomNumber(List<Integer> computer) {
-        while (computer.size() < 3) {
-            int randomNumber = Randoms.pickNumberInRange(1, 9);
+        while (computer.size() < MAX_NUMBER_SIZE) {
+            int randomNumber = Randoms.pickNumberInRange(MIN_NUMBER, MAX_NUMBER);
             if (!computer.contains(randomNumber)) {
                 computer.add(randomNumber);
             }
@@ -98,8 +110,8 @@ public class Application {
     }
 
     private static int getStrikeCount(List<Integer> computerNumber, List<Integer> userNumber) {
-        int strike = 0;
-        for (int i = 0; i < 3; i++) {
+        int strike = INIT_NUMBER;
+        for (int i = INIT_NUMBER; i < MAX_NUMBER_SIZE; i++) {
             if (computerNumber.get(i) == userNumber.get(i)) {
                 strike++;
             }
@@ -108,8 +120,8 @@ public class Application {
     }
 
     private static int getBallCount(List<Integer> computerNumber, List<Integer> userNumber) {
-        int ball = 0;
-        for (int i = 0; i < 3; i++) {
+        int ball = INIT_NUMBER;
+        for (int i = INIT_NUMBER; i < MAX_NUMBER_SIZE; i++) {
             if (computerNumber.contains(userNumber.get(i))) {
                 ball++;
             }
@@ -118,15 +130,15 @@ public class Application {
     }
 
     private static String getBaseballResult(int strikeCount, int ballCount) {
-        if (strikeCount > 0 && ballCount > 0) {
+        if (strikeCount > INIT_NUMBER && ballCount > INIT_NUMBER) {
             return ballCount + "볼 " + strikeCount + "스트라이크";
         }
 
-        if (strikeCount > 0) {
+        if (strikeCount > INIT_NUMBER) {
             return strikeCount + "스트라이크";
         }
 
-        if (ballCount > 0) {
+        if (ballCount > INIT_NUMBER) {
             return ballCount + "볼";
         }
 
@@ -138,7 +150,7 @@ public class Application {
     }
 
     private static boolean isGameOver(int strikeCount) {
-        return strikeCount == 3;
+        return strikeCount == WINNING_STRIKE_COUNT;
     }
 
     private static void handleGameOver(List<Integer> computer) {
@@ -147,12 +159,12 @@ public class Application {
     }
 
     private static boolean restartOrExitGame() {
-        System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+        System.out.println("게임을 새로 시작하려면 " + RESTART_KEYWORD + ", 종료하려면 " + EXIT_KEYWORD + "를 입력하세요.");
         String userChoice = Console.readLine();
 
-        if ("1".equals(userChoice)) return true;
-        if ("2".equals(userChoice)) return false;
+        if (RESTART_KEYWORD.equals(userChoice)) return true;
+        if (EXIT_KEYWORD.equals(userChoice)) return false;
 
-        throw new IllegalArgumentException("1 또는 2 중 하나만 선택하세요.");
+        throw new IllegalArgumentException(RESTART_KEYWORD + " 또는 " + EXIT_KEYWORD + " 중 하나만 선택하세요.");
     }
 }
