@@ -60,6 +60,12 @@ public class Application {
         }
     }
 
+    private static void validateNumberSize(String input) {
+        if (input.length() != 3) {
+            throw new IllegalArgumentException("3자리의 수를 입력해주세요.");
+        }
+    }
+
     private static void validateDuplicate(int size) {
         if (size < 3) {
             throw new IllegalArgumentException("서로 다른 3자리의 수를 입력해주세요.");
