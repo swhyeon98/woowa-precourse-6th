@@ -25,8 +25,6 @@ public class Application {
 
             numbers = convertStringToIntList(input);
 
-            validateDuplicate(numbers.size());
-
             strikeCount = getStrikeCount(computer, numbers);
             ballCount = getBallCount(computer, numbers);
 
@@ -42,7 +40,6 @@ public class Application {
         List<Integer> numbers;
         numbers = Arrays.stream(input.split(""))
                 .map(Integer::parseInt)
-                .distinct()
                 .collect(Collectors.toList());
         return numbers;
     }
@@ -57,6 +54,7 @@ public class Application {
     private static void validateInput(String input) {
         validateIsNumber(input);
         validateNumberSize(input);
+        validateNoDuplicate(input);
     }
 
     private static void validateIsNumber(String input) {
@@ -71,8 +69,11 @@ public class Application {
         }
     }
 
-    private static void validateDuplicate(int size) {
-        if (size < 3) {
+    private static void validateNoDuplicate(String input) {
+        long distinctCount = input.chars()
+                .distinct()
+                .count();
+        if (distinctCount < input.length()) {
             throw new IllegalArgumentException("서로 다른 3자리의 수를 입력해주세요.");
         }
     }
