@@ -50,8 +50,13 @@ public class Application {
     private static String getUserInput() {
         System.out.print("숫자를 입력해주세요 : ");
         String input = Console.readLine();
-        validateIsNumber(input);
+        validateInput(input);
         return input;
+    }
+
+    private static void validateInput(String input) {
+        validateIsNumber(input);
+        validateNumberSize(input);
     }
 
     private static void validateIsNumber(String input) {
