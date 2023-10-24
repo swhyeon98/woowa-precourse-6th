@@ -50,7 +50,20 @@ public class Application {
     private static String getUserInput() {
         System.out.print("숫자를 입력해주세요 : ");
         String input = Console.readLine();
+        validateIsNumber(input);
         return input;
+    }
+
+    private static void validateIsNumber(String input) {
+        if (!input.matches("^[1-9]+$")) {
+            throw new IllegalArgumentException("숫자만 입력해주세요.");
+        }
+    }
+
+    private static void validateDuplicate(int size) {
+        if (size < 3) {
+            throw new IllegalArgumentException("서로 다른 3자리의 수를 입력해주세요.");
+        }
     }
 
     private static void generateRandomNumber(List<Integer> computer) {
@@ -59,12 +72,6 @@ public class Application {
             if (!computer.contains(randomNumber)) {
                 computer.add(randomNumber);
             }
-        }
-    }
-
-    private static void validateDuplicate(int size) {
-        if (size < 3) {
-            throw new IllegalArgumentException("서로 다른 3자리의 수를 입력해주세요.");
         }
     }
 
