@@ -37,4 +37,17 @@ class OrderItemTest {
         assertThatThrownBy(() -> new OrderItem(menu, quantity))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("주문 수량 미만 대한 예외 처리")
+    @ValueSource(strings = {"0", "-1", "-200"})
+    @ParameterizedTest
+    public void underQuantity(String input) {
+        //given
+        Menu menu = new Menu("양송이수프", 8000);
+        int quantity = Integer.parseInt(input);
+
+        //then
+        assertThatThrownBy(() -> new OrderItem(menu, quantity))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
