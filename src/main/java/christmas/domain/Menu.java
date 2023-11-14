@@ -9,4 +9,8 @@ public class Menu {
         this.name = name;
         this.price = price;
     }
+
+    public String getName() {
+        return name;
+    }
 }
