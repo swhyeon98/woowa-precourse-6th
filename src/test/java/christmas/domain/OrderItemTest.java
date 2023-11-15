@@ -21,7 +21,7 @@ class OrderItemTest {
         OrderItem orderItem = new OrderItem("양송이수프", quantity);
 
         //then
-        assertThat(orderItem.getMenu()).isEqualTo(menuName);
+        assertThat(orderItem.getMenuName()).isEqualTo(menuName);
         assertThat(orderItem.getQuantity()).isEqualTo(quantity);
     }
 
