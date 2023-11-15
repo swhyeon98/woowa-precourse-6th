@@ -18,6 +18,12 @@ public class Order {
         orderItems.addAll(newOrderItems);
     }
 
+    public int getTotalAmount() {
+        return orderItems.stream()
+                .mapToInt(OrderItem::calculateAmount)
+                .sum();
+    }
+
     private void validateNoDuplicate(List<OrderItem> newOrderItems) {
         long uniqueCount = newOrderItems.stream()
                 .map(orderItem -> orderItem.getMenu().getName())
