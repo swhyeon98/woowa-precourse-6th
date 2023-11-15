@@ -11,6 +11,10 @@ public class Order {
         this.orderItems = new ArrayList<>();
     }
 
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
     public void addOrderItem(OrderItem newOrderItem) {
         validateNoDuplicate(newOrderItem);
         this.orderItems.add(newOrderItem);
