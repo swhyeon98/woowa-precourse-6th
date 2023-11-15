@@ -2,7 +2,10 @@ package christmas.service;
 
 import christmas.domain.Order;
 import christmas.domain.OrderItem;
+import christmas.domain.discount.DiscountPolicy;
+import christmas.repository.MenuRepository;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -13,13 +16,48 @@ public class OrderService {
 
     private static final Pattern ORDER_ITEM_PATTERN = Pattern.compile("^(.+)\\-(\\d+)$");
 
-    public Order creatOrder(String input) {
+    private final MenuRepository menuRepository;
+    private final List<DiscountPolicy> discountPolicies;
+
+    public OrderService(MenuRepository menuRepository, List<DiscountPolicy> discountPolicies) {
+        this.menuRepository = menuRepository;
+        this.discountPolicies = discountPolicies;
+    }
+
+    public Order createOrder(String input) {
         Order order = new Order();
         List<OrderItem> orderItems = splitAndToOrderList(input);
         for (OrderItem item : orderItems) {
             order.addOrderItem(item);
         }
         return order;
+    }
+
+    public int calculateTotalBeforeDiscount(Order order) {
+        return order.calculateTotalBeforeDiscount(menuRepository);
+    }
+
+    public int calculateTotalDiscount(Order order, LocalDate date) {
+        return discountPolicies.stream()
+                .mapToInt(policy -> policy.discount(order, date))
+                .sum();
+    }
+
+    public String determineGiftItem(Order order) {
+        int totalAmount = calculateTotalBeforeDiscount(order);
+        String giftItem = "없음";
+        if (totalAmount >= 120000) {
+            giftItem = "샴페인";
+        }
+        return giftItem;
+    }
+
+    public String determineEventBadge(Order order, LocalDate date) {
+        int totalBenefit = calculateTotalDiscount(order, date);
+        if (totalBenefit >= 20000) return "산타";
+        if (totalBenefit >= 10000) return "트리";
+        if (totalBenefit >= 5000) return "별";
+        return "없음";
     }
 
     private List<OrderItem> splitAndToOrderList(String input) {

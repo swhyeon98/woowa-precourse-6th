@@ -27,4 +27,9 @@ public class SpecialDiscountPolicy implements DiscountPolicy {
         }
         return 0;
     }
+
+    @Override
+    public String getDescription() {
+        return "특별 할인";
+    }
 }

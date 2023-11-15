@@ -24,6 +24,11 @@ public class WeekdayDiscountPolicy implements DiscountPolicy {
         return 0;
     }
 
+    @Override
+    public String getDescription() {
+        return "평일 할인";
+    }
+
     private int calculateDiscount(Order order, Category category) {
         return order.getOrderItems().stream()
                 .filter(item -> {

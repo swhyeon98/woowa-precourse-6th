@@ -14,4 +14,9 @@ public class XmasDdayDiscountPolicy implements DiscountPolicy {
         }
         return 0;
     }
+
+    @Override
+    public String getDescription() {
+        return "크리스마스 디데이 할인";
+    }
 }
