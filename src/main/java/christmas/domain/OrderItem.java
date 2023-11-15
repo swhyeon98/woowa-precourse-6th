@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import christmas.repository.MenuRepository;
+
 public class OrderItem {
 
     private final String menuName;
@@ -18,6 +20,10 @@ public class OrderItem {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public int calculateItemPrice(MenuRepository menuRepository) {
+        return menuRepository.findPriceByName(menuName) * quantity;
     }
 
     private void validateQuantity(int quantity) {
