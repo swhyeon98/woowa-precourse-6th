@@ -12,7 +12,7 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public String getMenu() {
+    public String getMenuName() {
         return menuName;
     }
 
