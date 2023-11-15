@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.*;
+
 class OrderTest {
 
     private Order order;
@@ -32,18 +34,16 @@ class OrderTest {
         order.addOrderItem(orderItem4);
 
         //then
-        Assertions.assertThat(order.getOrderItems())
+        assertThat(order.getOrderItems())
                 .containsExactlyInAnyOrder(orderItem1, orderItem2, orderItem3, orderItem4);
     }
 
     @Test
-    @DisplayName("")
-    public void test(){
-        //given
-
-        //when
-
-        //then
+    @DisplayName("중복 메뉴 이름에 대한 예외 처리")
+    public void addDuplicateOrderItemThrowsException(){
+        order.addOrderItem(orderItem1);
+        assertThatThrownBy(() -> order.addOrderItem(orderItem1))
+                .isInstanceOf(IllegalArgumentException.class);
 
     }
 }
