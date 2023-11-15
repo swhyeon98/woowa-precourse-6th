@@ -24,7 +24,7 @@ class OrderTest {
 
     @Test
     @DisplayName("정상 주문")
-    public void order(){
+    public void creatOrder(){
         //when
         order.addOrderItem(orderItem1);
         order.addOrderItem(orderItem2);
@@ -34,5 +34,16 @@ class OrderTest {
         //then
         Assertions.assertThat(order.getOrderItems())
                 .containsExactlyInAnyOrder(orderItem1, orderItem2, orderItem3, orderItem4);
+    }
+
+    @Test
+    @DisplayName("")
+    public void test(){
+        //given
+
+        //when
+
+        //then
+
     }
 }
