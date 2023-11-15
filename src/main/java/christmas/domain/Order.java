@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import christmas.repository.MenuRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,12 @@ public class Order {
     public void addOrderItem(OrderItem newOrderItem) {
         validateNoDuplicate(newOrderItem);
         this.orderItems.add(newOrderItem);
+    }
+
+    public int calculateTotalBeforeDiscount(MenuRepository menuRepository) {
+        return orderItems.stream()
+                .mapToInt(item -> item.calculateItemPrice(menuRepository))
+                .sum();
     }
 
     private void validateNoDuplicate(OrderItem newOrderItem) {
