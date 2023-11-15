@@ -2,26 +2,22 @@ package christmas.domain;
 
 public class OrderItem {
 
-    private final Menu menu;
+    private final String menuName;
     private final int quantity;
 
 
-    public OrderItem(Menu menu, int quantity) {
-        this.menu = menu;
+    public OrderItem(String menuName, int quantity) {
+        this.menuName = menuName;
         validateQuantity(quantity);
         this.quantity = quantity;
     }
 
-    public Menu getMenu() {
-        return menu;
+    public String getMenu() {
+        return menuName;
     }
 
     public int getQuantity() {
         return quantity;
-    }
-
-    public int calculateAmount() {
-        return menu.getPrice() * quantity;
     }
 
     private void validateQuantity(int quantity) {
