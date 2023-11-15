@@ -14,14 +14,14 @@ class OrderItemTest {
     @DisplayName("정상적인 OrderItem 생성")
     public void createOrderItem() {
         //given
-        Menu menu = new Menu("양송이수프", 8000);
+        String menuName = "양송이수프";
         int quantity = 1;
 
         //when
-        OrderItem orderItem = new OrderItem(menu, quantity);
+        OrderItem orderItem = new OrderItem("양송이수프", quantity);
 
         //then
-        assertThat(orderItem.getMenu()).isEqualTo(menu);
+        assertThat(orderItem.getMenu()).isEqualTo(menuName);
         assertThat(orderItem.getQuantity()).isEqualTo(quantity);
     }
 
@@ -30,11 +30,11 @@ class OrderItemTest {
     @ParameterizedTest
     public void overQuantity(String input) {
         //given
-        Menu menu = new Menu("양송이수프", 8000);
+        String menuName = "양송이수프";
         int quantity = Integer.parseInt(input);
 
         //then
-        assertThatThrownBy(() -> new OrderItem(menu, quantity))
+        assertThatThrownBy(() -> new OrderItem("양송이수프", quantity))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -43,11 +43,11 @@ class OrderItemTest {
     @ParameterizedTest
     public void underQuantity(String input) {
         //given
-        Menu menu = new Menu("양송이수프", 8000);
+        String menuName = "양송이수프";
         int quantity = Integer.parseInt(input);
 
         //then
-        assertThatThrownBy(() -> new OrderItem(menu, quantity))
+        assertThatThrownBy(() -> new OrderItem("양송이수프", quantity))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
