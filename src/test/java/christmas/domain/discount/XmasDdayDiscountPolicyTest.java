@@ -34,4 +34,44 @@ class XmasDdayDiscountPolicyTest {
         //then
         Assertions.assertThat(discount).isEqualTo(1000);
     }
+
+    @Test
+    @DisplayName("12월 2일 할인 금액 테스트")
+    void discountDecemberSecond(){
+        //given
+        LocalDate date = LocalDate.of(2023, Month.DECEMBER, 2);
+
+        //when
+        int discount = discountPolicy.discount(order, date);
+
+        //then
+        Assertions.assertThat(discount).isEqualTo(1100);
+    }
+
+    @Test
+    @DisplayName("12월 25일 할인 금액 테스트")
+    void discountDDay(){
+        //given
+        LocalDate date = LocalDate.of(2023, Month.DECEMBER, 25);
+
+        //when
+        int discount = discountPolicy.discount(order, date);
+
+        //then
+        Assertions.assertThat(discount).isEqualTo(3400);
+    }
+
+    @Test
+    @DisplayName("12월 26일 할인 금액 테스트")
+    void discountOverDDay(){
+        //given
+        LocalDate date = LocalDate.of(2023, Month.DECEMBER, 26);
+
+        //when
+        int discount = discountPolicy.discount(order, date);
+
+        //then
+        Assertions.assertThat(discount).isEqualTo(0);
+    }
+
 }
