@@ -5,14 +5,18 @@ import christmas.domain.Menu;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class MenuRepository {
 
     private final List<Menu> menus = new ArrayList<>();
+    private final Map<String, Integer> menuPrices;
 
     public MenuRepository() {
+        this.menuPrices = new HashMap<>();
         init();
     }
 
@@ -39,5 +43,13 @@ public class MenuRepository {
         return menus.stream()
                 .filter(item -> item.getName().equalsIgnoreCase(name))
                 .findFirst();
+    }
+
+    public int findPriceByName(String menuName) {
+        Integer price = menuPrices.get(menuName);
+        if (price == null) {
+            throw new IllegalArgumentException("[ERROR] 메뉴를 찾을 수 없습니다: " + menuName);
+        }
+        return price;
     }
 }
