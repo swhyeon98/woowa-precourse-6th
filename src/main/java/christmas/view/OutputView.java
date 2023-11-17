@@ -2,6 +2,7 @@ package christmas.view;
 
 import christmas.domain.Category;
 import christmas.domain.Menu;
+import christmas.domain.OrderItem;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,7 +39,7 @@ public class OutputView {
         return String.format("%,d원", price);
     }
 
-    public void printOrderItems(List<String> orderedItems) {
+    public void printOrderItems(List<OrderItem> orderedItems) {
         System.out.println("<주문 메뉴>");
         orderedItems.forEach(System.out::println);
     }
@@ -65,5 +66,9 @@ public class OutputView {
 
     public void printEventBadge(String eventBadge) {
         System.out.println("\n<12월 이벤트 배지>\n" + eventBadge);
+    }
+
+    public void printMessage(String message) {
+        System.out.println(message);
     }
 }

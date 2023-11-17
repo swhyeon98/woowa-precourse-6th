@@ -1,6 +1,7 @@
 package christmas.view;
 
 import christmas.domain.Menu;
+import christmas.domain.OrderItem;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class ChristmasView {
         outputView.printMenu(menus);
     }
 
-    public void printOrderItems(List<String> orderedItems) {
+    public void printOrderItems(List<OrderItem> orderedItems) {
         outputView.printOrderItems(orderedItems);
     }
 
@@ -56,5 +57,9 @@ public class ChristmasView {
 
     public void printEventBadge(String eventBadge) {
         outputView.printEventBadge(eventBadge);
+    }
+
+    public void printMessage(String message) {
+        outputView.printMessage(message);
     }
 }

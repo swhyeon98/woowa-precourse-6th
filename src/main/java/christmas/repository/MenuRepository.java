@@ -16,8 +16,9 @@ public class MenuRepository {
     private final Map<String, Integer> menuPrices;
 
     public MenuRepository() {
-        this.menuPrices = new HashMap<>();
         init();
+        this.menuPrices = new HashMap<>();
+        menus.forEach(menu -> menuPrices.put(menu.getName(), menu.getPrice()));
     }
 
     private void init() {
